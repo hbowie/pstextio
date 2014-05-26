@@ -1,5 +1,5 @@
 /*
- * Copyright 1999 - 2013 Herb Bowie
+ * Copyright 1999 - 2014 Herb Bowie
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,8 +28,9 @@ public class StringLineReader
   
   public static final String HTML_EOL = "<!--EOL-->";
   
-  private             String s;
-  private             int i           = 0;
+  private             String  s;
+  private             int     i     = 0;
+  private             boolean atEnd = false;
   
   /**
    Constructor.
@@ -47,6 +48,7 @@ public class StringLineReader
   */
   public boolean open () {
     i = 0;
+    atEnd = false;
     return true;
   }
   
@@ -87,8 +89,11 @@ public class StringLineReader
     } else {
       i = i + HTML_EOL.length();
     }
+    
+    // See if we have anything to return
     if (start >= s.length()) {
-      return null;
+      atEnd = true;
+      return "";
     } else {
       return s.substring(start, end);
     }
@@ -112,7 +117,7 @@ public class StringLineReader
   }
   
   public boolean isAtEnd() {
-    return (s == null || i >= s.length());
+    return atEnd;
   }
   
   public int length() {

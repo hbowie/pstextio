@@ -1,5 +1,5 @@
 /*
- * Copyright 1999 - 2013 Herb Bowie
+ * Copyright 1999 - 2014 Herb Bowie
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -88,6 +88,11 @@ public class FileLineReader
     return (inFile != null && inFile.canRead());
   }
   
+  /**
+   Any exceptions so far?
+  
+   @return True if no exceptions; false otherwise. 
+  */
   public boolean isOK () {
     return inOK;
   }
@@ -221,10 +226,6 @@ public class FileLineReader
      atEnd variable will be turned on, and the file will be closed. 
      
      @return    The next line in the file (or an empty string at end of file).
-    
-     @throws IOException            If read failure.
-     @throws FileNotFoundException  On first read for file, if file name 
-                                    passed to constructor cannot be found.
    */
   public String readLine () {
     line = "";
@@ -264,6 +265,11 @@ public class FileLineReader
     return lineNumber;
   } 
   
+  /**
+   Close the input file. 
+  
+   @return True if no exceptions. 
+  */
   public boolean close () {
     
     if (openForInput) {
