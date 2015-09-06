@@ -1,5 +1,5 @@
 /*
- * Copyright 1999 - 2013 Herb Bowie
+ * Copyright 1999 - 2015 Herb Bowie
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -77,6 +77,12 @@ public class StringMaker
     return null;
   }
   
+  /**
+   Returns the string made by the writer. 
+  
+   @return The resulting string. 
+  */
+  @Override
   public String toString () {
     return str.toString();
   }
