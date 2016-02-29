@@ -1,5 +1,5 @@
 /*
- * Copyright 1999 - 2013 Herb Bowie
+ * Copyright 1999 - 2016 Herb Bowie
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,7 +41,16 @@ public class FileMaker
   /** Creates a new instance of FileMaker */
   public FileMaker (URL url) {
     if (url.getProtocol().equals ("file")) {
-      outFile = new File (url.getFile());
+      String outFileStr = url.getFile();
+      try {
+        outFileStr = java.net.URLDecoder.decode(url.getFile(), "UTF-8");
+      } catch (IllegalArgumentException e) {
+        
+      }
+      catch (UnsupportedEncodingException uee) {
+      
+      }
+      outFile = new File (outFileStr);
     } else {
       outOK = false;
     }
